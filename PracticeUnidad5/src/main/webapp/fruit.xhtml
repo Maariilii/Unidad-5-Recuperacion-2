@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+<body>
+	<h1>Fruits</h1>
+	<h:form id="frmFruit">
+	Name:<h:inputText value="#{fruitController.fruit.name}" />
+	Color:<h:inputText value="#{fruitController.fruit.color}" />
+	Form:<h:inputText value="#{fruitController.fruit.form}" />
+	Description:<h:inputText value="#{fruitController.fruit.description}" />
+		<h:commandButton action="#{fruitController.save}" value="Save">
+			<f:ajax execute="frmFruit" render="frmFruit" />
+		</h:commandButton>
+		<h:commandButton rendered="#{fruitController.editMode}"
+			action="#{fruitController.cancel}" value="Cancel">
+			<f:ajax render="frmFruit"></f:ajax>
+		</h:commandButton>
+		<h:dataTable value="#{fruitController.fruits}" var="f" id="dtFruit">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+		 #{f.id} </h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+		 #{f.name} </h:column>
+			<h:column>
+				<f:facet name="header">Color</f:facet>
+		 #{f.color} </h:column>
+			<h:column>
+				<f:facet name="header">Form</f:facet>
+		 #{f.form} </h:column>
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+		 #{f.description} </h:column>
+			<h:column>
+				<f:facet name="header">Actions</f:facet>
+				<h:commandButton action="#{fruitController.delete(f)}" value="Delete"
+					onClick="return window.confirm ('Are you sure?')">
+					<f:ajax render="frmFruit:dtFruit" />
+				</h:commandButton>
+				<h:commandButton action="#{fruitController.update(f)}" value="Update">
+					<f:ajax render="frmFruit" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</body>
+
+
+</html>

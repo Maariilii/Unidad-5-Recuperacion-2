@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+<body>
+	<h1>Notes</h1>
+	<h:form id="frmTelephone">
+	Brand:<h:inputText value="#{telephoneController.telephone.brand}" />
+	Model:<h:inputText value="#{telephoneController.telephone.model}" />
+	Company:<h:inputText value="#{telephoneController.telephone.company}" />
+		<h:commandButton action="#{telephoneController.save}" value="Save">
+			<f:ajax execute="frmTelephone" render="frmTelephone" />
+		</h:commandButton>
+		<h:commandButton rendered="#{telephoneController.editMode}"
+			action="#{telephoneController.cancel}" value="Cancel">
+			<f:ajax render="frmTelephone"></f:ajax>
+		</h:commandButton>
+		<h:dataTable value="#{telephoneController.telephones}" var="t" id="dtTelephone">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+		 #{t.id} </h:column>
+			<h:column>
+				<f:facet name="header">Brand</f:facet>
+		 #{t.brand} </h:column>
+			<h:column>
+				<f:facet name="header">Model</f:facet>
+		 #{t.model} </h:column>
+			<h:column>
+				<f:facet name="header">Company</f:facet>
+		 #{t.company} </h:column>
+			<h:column>
+				<f:facet name="header">Actions</f:facet>
+				<h:commandButton action="#{telephoneController.delete(t)}" value="Delete"
+					onClick="return window.confirm ('Are you sure?')">
+					<f:ajax render="frmTelephone:dtTelephone" />
+				</h:commandButton>
+				<h:commandButton action="#{telephoneController.update(t)}" value="Update">
+					<f:ajax render="frmTelephone" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</body>
+
+
+</html>

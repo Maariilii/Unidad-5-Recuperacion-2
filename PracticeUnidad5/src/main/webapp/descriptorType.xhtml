@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+</h:head>
+<body>
+	<h1>DescriptorType</h1>
+	<h:form id="frmDescriptorType">
+	DescriptorTypeCode:<h:inputText value="#{descriptorTypeController.descriptorType.descriptorTypeCode}" />
+	DescriptorTypeName:<h:inputText value="#{descriptorTypeController.descriptorType.descriptorTypeName}" />
+	DescriptorTypeUnit:<h:inputText value="#{descriptorTypeController.descriptorType.descriptorTypeUnit}" />
+	DescriptorTypeDesc:<h:inputText value="#{descriptorTypeController.descriptorType.descriptorTypeDesc}" />
+	DescriptorTypeLength:<h:inputText value="#{descriptorTypeController.descriptorType.descriptorTypeLength}" />
+	
+	
+	
+	
+		 <h:commandButton action="#{descriptorTypeController.save}" value="Save">
+		 <f:ajax execute="frmDescriptorType" render="frmDescriptorType" /> 
+		 </h:commandButton>
+		 <h:commandButton rendered="#{descriptorTypeController.editMode}"
+		  action="#{descriptorTypeController.save}" value="Cancel" >
+		  <f:ajax render="frmDescriptorType"></f:ajax>
+		  </h:commandButton>
+		 <h:dataTable value="#{descriptorTypeController.descriptorTypes}" var="d" id="dtDescriptorType">
+		 <h:column> 
+		 <f:facet name="header">ID</f:facet>
+		 #{d.id} </h:column>
+		 <h:column> 
+		 <f:facet name="header">DescriptorTypeCode</f:facet>
+		 #{d.descriptorTypeCode} </h:column>
+		 <h:column> 
+		 <f:facet name="header">DescriptorTypeName</f:facet>
+		 #{d.descriptorTypeName} </h:column>
+		 <h:column> 
+		 <f:facet name="header">DescriptorTypeUnit</f:facet>
+		 #{d.descriptorTypeUnit} </h:column>
+		 <h:column>
+		  <f:facet name="header">DescriptorTypeDesc</f:facet>
+		 #{d.descriptorTypeDesc} </h:column>
+		 <h:column>
+		  <f:facet name="header">DescriptorTypeLength</f:facet>
+		 #{d.descriptorTypeLength} </h:column>
+		 <h:column>
+		 <f:facet name="header">Actions</f:facet>
+		 <h:commandButton action="#{descriptorTypeController.delete(d)}" value="Delete" 
+		 onClick="return window.confirm ('Are you sure?')">
+		 <f:ajax render="frmDescriptorType:dtDescriptorType"/></h:commandButton>
+		 <h:commandButton action="#{descriptorTypeController.update(d)}" value="Update" >
+		 <f:ajax render="frmDescriptorType"/> </h:commandButton>
+		 </h:column>
+		 </h:dataTable>
+		</h:form>
+	
+	</body>
+	
+	
+</html>
